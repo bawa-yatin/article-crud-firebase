@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
-import "./index.css";
+//import "./index.css";
 import { auth, db, logout, storage } from "../../config/firebase";
 import {
   query,
@@ -147,6 +147,9 @@ const Dashboard = () => {
           </button>
         </div>
       </div>*/}
+      <button className="dashboard__btn" onClick={logout}>
+        Logout
+      </button>
       <div className="container">
         <div className="row my-5">
           <div className="col-md-8">

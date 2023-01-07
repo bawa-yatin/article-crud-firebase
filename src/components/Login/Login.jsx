@@ -40,8 +40,8 @@ const Login = () => {
   //};
 
   return (
-    <div className="login">
-      <div className="login__container">
+    <>
+      {/*<div className="login__container">
         <input
           type="text"
           className="login__textBox"
@@ -72,8 +72,66 @@ const Login = () => {
         <div>
           Don't have an account? <Link to="/register">Register</Link> now.
         </div>
+      </div>*/}
+
+      <div class="login-form">
+        <div class="container">
+          <div class="container-wrapper">
+            <h3 class="login-text">
+              <i class="bi bi-person-circle ac-logo"></i>Login
+            </h3>
+
+            <div class="item">
+              <input
+                class="input"
+                type="text"
+                placeholder="Email Address"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+              />
+            </div>
+            <div class="item">
+              <input
+                class="input"
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+              />
+            </div>
+            <span class="remember">
+              <Link to="/reset">Forgot Password?</Link>{" "}
+            </span>
+
+            <div class="item submit">
+              <button
+                type="button"
+                onClick={() => logInWithEmailAndPassword(email, password)}
+              >
+                Submit
+              </button>
+            </div>
+
+            <h2>
+              <span>OR</span>
+            </h2>
+
+            <div class="social-media">
+              <button
+                type="button"
+                className="logingoogle"
+                onClick={signInWithGoogle}
+              >
+                <div class="icons8-google social-mediaImg"></div>
+              </button>
+            </div>
+            <span class="ac">
+              Don't have an account? <Link to="/register">Sign Up</Link>
+            </span>
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
