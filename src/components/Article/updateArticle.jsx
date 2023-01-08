@@ -1,3 +1,5 @@
+// Update Article Component
+
 import { updateDoc, doc } from "firebase/firestore";
 import { db, storage } from "../../config/firebase";
 import { toast } from "react-toastify";
@@ -94,17 +96,15 @@ export default function UpdateArticle({
       );
 
       setFormData({
-        title: articleTitle,
-        description: articleDesc,
-        image: articleImage,
+        title: formData.title,
+        description: formData.description,
+        image: formData.image,
         newImage: "",
       });
       const storageVar = ref(storage, articleImage);
       await deleteObject(storageVar);
     }
   };
-
-  console.log(formData.newImage.name);
 
   return (
     <React.Fragment>
@@ -145,7 +145,8 @@ export default function UpdateArticle({
             type="text"
             className="form-control"
             value={
-              formData.newImage == "" ? formData.image : formData.newImage.name
+              formData.image
+              //formData.newImage == "" ? formData.image : formData.newImage.name
             }
             readOnly
           />

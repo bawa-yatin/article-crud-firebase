@@ -1,3 +1,5 @@
+// User Registration Page
+
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
@@ -64,7 +66,7 @@ const Register = () => {
         </div>
       </div>*/}
       <div class="login-form">
-        <div class="container">
+        <div class="container wrapper">
           <div class="container-wrapper">
             <h3 class="login-text">
               <i class="bi bi-person-circle ac-logo"></i>Register

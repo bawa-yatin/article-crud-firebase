@@ -1,7 +1,11 @@
+// Dashboard Page
+
 import React, { useEffect, useState } from "react";
+import { FaUserAlt } from "react-icons/fa";
+import { MdLogout } from "react-icons/md";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
-//import "./index.css";
+import { Modal, Button } from "react-bootstrap";
 import { auth, db, logout, storage } from "../../config/firebase";
 import {
   query,
@@ -9,9 +13,7 @@ import {
   getDocs,
   where,
   Timestamp,
-  doc,
   onSnapshot,
-  orderBy,
   addDoc,
 } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
@@ -19,6 +21,7 @@ import Articles from "../Article/articles";
 import { toast } from "react-toastify";
 
 const Dashboard = () => {
+  const [show, setShow] = useState(false);
   const [user, loading, error] = useAuthState(auth);
   const [isLoading, setIsLoading] = useState(true);
   const [name, setName] = useState("");
@@ -33,6 +36,9 @@ const Dashboard = () => {
     image: "",
     createdAt: Timestamp.now().toDate(),
   });
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const [progress, setProgress] = useState(0);
 
@@ -85,8 +91,9 @@ const Dashboard = () => {
             createdAt: Timestamp.now().toDate(),
           })
             .then(() => {
-              toast("Article added successfully", { type: "success" });
               setProgress(0);
+              setShow(false);
+              toast("Article added successfully", { type: "success" });
             })
             .catch(err => {
               toast("Error adding article", { type: "error" });
@@ -147,10 +154,133 @@ const Dashboard = () => {
           </button>
         </div>
       </div>*/}
-      <button className="dashboard__btn" onClick={logout}>
-        Logout
-      </button>
-      <div className="container">
+
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            Firebase App
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-md-auto gap-2">
+              <li class="nav-item rounded">
+                <div class="nav-link active" aria-current="page" href="#">
+                  <FaUserAlt fill="#fff" />
+                  <span
+                    style={{
+                      marginLeft: "8px",
+                      color: "#fff",
+                      position: "relative",
+                      top: "3px",
+                    }}
+                  >
+                    {name}
+                  </span>
+                </div>
+              </li>
+
+              <li class="nav-item rounded">
+                <div class="nav-link active" onClick={logout}>
+                  <MdLogout fill="#fff" />
+                  <span
+                    style={{
+                      marginLeft: "8px",
+                      color: "#fff",
+                      position: "relative",
+                      top: "3px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Logout
+                  </span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div className="container-fluid">
+        <button
+          type="button"
+          class="btn btn-outline-primary my-4"
+          onClick={handleShow}
+          style={{ display: "block", marginRight: 0, marginLeft: "auto" }}
+        >
+          Add Article
+        </button>
+      </div>
+
+      <Modal show={show} onHide={handleClose} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Add Article</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="form-group">
+            <label htmlFor="">Title</label>
+            <input
+              type="text"
+              name="title"
+              className="form-control"
+              value={formData.title}
+              onChange={e => handleChange(e)}
+            />
+          </div>
+
+          <label htmlFor="">Description</label>
+          <textarea
+            name="description"
+            className="form-control"
+            value={formData.description}
+            onChange={e => handleChange(e)}
+          />
+
+          <label htmlFor="">Image</label>
+          <input
+            type="file"
+            name="image"
+            accept="image/*"
+            className="form-control"
+            onChange={e => handleImageChange(e)}
+          />
+
+          {progress === 0 ? null : (
+            <div className="progress">
+              <div
+                className="progress-bar progress-bar-striped mt-2"
+                style={{ width: `${progress}%` }}
+              >
+                {`uploading image ${progress}%`}
+              </div>
+            </div>
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handlePublish}>
+            Publish
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      <div className="container-fluid">
+        <div className="row">
+          <Articles articles={info} />
+        </div>
+      </div>
+
+      {/*<div className="container">
         <div className="row my-5">
           <div className="col-md-8">
             <Articles articles={info} />
@@ -207,7 +337,7 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div>*/}
     </>
   );
 };

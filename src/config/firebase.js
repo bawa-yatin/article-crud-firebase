@@ -2,7 +2,6 @@ import { initializeApp } from "firebase/app";
 import {
   GoogleAuthProvider,
   getAuth,
-  onAuthStateChanged,
   signInWithPopup,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
@@ -18,7 +17,6 @@ import {
   addDoc,
 } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
-import { useState, useEffect, useContext, createContext } from "react";
 
 // Firebase config
 const firebaseConfig = {
@@ -35,24 +33,6 @@ const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
 const auth = getAuth(app);
 const db = getFirestore(app);
-
-//export const AuthContext = createContext();
-
-//export const AuthContextProvider = props => {
-//  const [user, setUser] = useState();
-//  const [error, setError] = useState();
-
-//  useEffect(() => {
-//    const unsubscribe = onAuthStateChanged(getAuth(), setUser, setError);
-//    return () => unsubscribe();
-//  }, []);
-//  return <AuthContext.Provider value={{ user, error }} {...props} />;
-//};
-
-//export const useAuthState = () => {
-//  const auth = useContext(AuthContext);
-//  return { ...auth, isAuthenticated: auth.user != null };
-//};
 
 // Google Provider Authentication
 const googleProvider = new GoogleAuthProvider();

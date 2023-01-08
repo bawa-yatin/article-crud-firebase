@@ -1,22 +1,20 @@
-import React, { useContext, useEffect, useState } from "react";
+// User Login Page
+
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   auth,
   logInWithEmailAndPassword,
   signInWithGoogle,
 } from "../../config/firebase";
-//import { signInWithEmailAndPassword } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import "./Login.css";
-//import { AuthContext } from "../../context/AuthContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
-
-  //const { dispatch } = useContext(AuthContext);
 
   useEffect(() => {
     if (loading) {
@@ -75,7 +73,7 @@ const Login = () => {
       </div>*/}
 
       <div class="login-form">
-        <div class="container">
+        <div class="container wrapper">
           <div class="container-wrapper">
             <h3 class="login-text">
               <i class="bi bi-person-circle ac-logo"></i>Login

@@ -1,3 +1,5 @@
+// Delete Article Component
+
 import { deleteDoc, doc } from "firebase/firestore";
 import React from "react";
 import { db, storage } from "../../config/firebase";

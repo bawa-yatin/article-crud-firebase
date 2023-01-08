@@ -1,3 +1,5 @@
+// Reset Password Page
+
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
@@ -37,7 +39,7 @@ const Reset = () => {
 
     <div className="reset-form">
       <div class="login-form">
-        <div class="container">
+        <div class="container wrapper">
           <div class="container-wrapper">
             <h3 class="login-text">
               <i class="bi bi-person-circle ac-logo"></i>Reset Password
