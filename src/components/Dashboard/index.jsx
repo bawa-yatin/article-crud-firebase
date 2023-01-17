@@ -144,17 +144,6 @@ const Dashboard = () => {
     "Loading..."
   ) : (
     <>
-      {/*<div className="dashboard">
-        <div className="dashboard__container">
-          Logged in as
-          <div>{name}</div>
-          <div>{user?.email}</div>
-          <button className="dashboard__btn" onClick={logout}>
-            Logout
-          </button>
-        </div>
-      </div>*/}
-
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">
@@ -279,65 +268,6 @@ const Dashboard = () => {
           <Articles articles={info} />
         </div>
       </div>
-
-      {/*<div className="container">
-        <div className="row my-5">
-          <div className="col-md-8">
-            <Articles articles={info} />
-          </div>
-          <div className="col-md-4">
-            <div className="border p-3 bg-light" style={{ position: "fixed" }}>
-              <>
-                <h2>Create article</h2>
-                <div className="form-group">
-                  <label htmlFor="">Title</label>
-                  <input
-                    type="text"
-                    name="title"
-                    className="form-control"
-                    value={formData.title}
-                    onChange={e => handleChange(e)}
-                  />
-                </div>
-
-                <label htmlFor="">Description</label>
-                <textarea
-                  name="description"
-                  className="form-control"
-                  value={formData.description}
-                  onChange={e => handleChange(e)}
-                />
-
-                <label htmlFor="">Image</label>
-                <input
-                  type="file"
-                  name="image"
-                  accept="image/*"
-                  className="form-control"
-                  onChange={e => handleImageChange(e)}
-                />
-
-                {progress === 0 ? null : (
-                  <div className="progress">
-                    <div
-                      className="progress-bar progress-bar-striped mt-2"
-                      style={{ width: `${progress}%` }}
-                    >
-                      {`uploading image ${progress}%`}
-                    </div>
-                  </div>
-                )}
-                <button
-                  className="form-control btn-primary mt-2"
-                  onClick={handlePublish}
-                >
-                  Publish
-                </button>
-              </>
-            </div>
-          </div>
-        </div>
-      </div>*/}
     </>
   );
 };
